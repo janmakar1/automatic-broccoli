@@ -3,12 +3,14 @@ package pl.biblioteka.demo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import pl.biblioteka.demo.classes.Book;
 import pl.biblioteka.demo.classes.Orders;
 import pl.biblioteka.demo.repo.BookRepo;
 import pl.biblioteka.demo.repo.OrderRepo;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -34,9 +36,13 @@ public class RestControlleer {
     }
 
 
-    @GetMapping("/{nick}")
-    public String showKara(){
-        return "";
+    @GetMapping("/zestawienie/{nick}")
+    public List<Orders> showBooksOrderedBy(@PathVariable String nick){
+        Date date = new Date();
+
+        List<Orders> usersOrders = orderRepo.findByNickName(nick);
+
+        return usersOrders;
     }
 
 }
