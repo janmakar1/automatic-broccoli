@@ -11,11 +11,12 @@ import pl.biblioteka.demo.repo.OrderRepo;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
 import java.util.List;
 
 @RestController
 public class RestControlleer {
+
+    private static final int DAYS_USER_CAN_KEEP_BOOK = 3; // .. can keep book without penalty
 
     public BookRepo bookRepo;
     private OrderRepo orderRepo;
@@ -43,6 +44,23 @@ public class RestControlleer {
         return usersOrders;
     }
 
+    private void printArray(Object[] objects){
+        System.out.println("--");
+        for (int i = 0; i < objects.length; i++) {
+            System.out.println(objects[i] + ", ");
+        }
+        System.out.println("--");
+    }
+
+    /**
+    funkcja pomocnicza obliczajaca roznice miedzy dniem wypozyczenia ksiazki a dniem dzisiejszym
+     */
+    private int findDays(LocalDate then) {
+        LocalDate now = LocalDate.now();
+        Period period = Period.between(then, now);
+        return period.getDays();
+    }
+
     @GetMapping("/days/{nick}")
     public int showDaysOfOneBookForUser(@PathVariable String nick){
 
@@ -51,11 +69,19 @@ public class RestControlleer {
         List<Orders> usersOrders = orderRepo.findByNickName(nick);
         Orders oneOrder = usersOrders.stream().findFirst().get();
         LocalDate then = oneOrder.getStartDate();
+        return findDays(then);
+    }
 
-        Period period = Period.between(then, now);
-        int days = period.getDays();
-
-        return days;
+    @GetMapping("/penalty/{nick}")
+    public int showPenaltyForUser(@PathVariable String nick){
+        List<Orders> usersOrders = orderRepo.findByNickName(nick);
+        int a = usersOrders.stream()
+                .filter((order) -> {
+                    return findDays(order.getStartDate()) > DAYS_USER_CAN_KEEP_BOOK;
+                }).mapToInt((order) -> {
+                    return findDays(order.getStartDate()) - DAYS_USER_CAN_KEEP_BOOK;
+                }).sum();
+        return a;
     }
 
 
