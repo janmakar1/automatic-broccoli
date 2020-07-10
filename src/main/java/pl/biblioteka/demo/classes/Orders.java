@@ -1,5 +1,7 @@
 package pl.biblioteka.demo.classes;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +21,8 @@ public class Orders {
     private String nickName;
     private String names;
     private String surname;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dates;
 
     public Orders() {

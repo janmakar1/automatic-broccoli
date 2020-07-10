@@ -62,7 +62,8 @@ public class ControllerWypozyczen {
     } */
     @PostMapping("/wypozyczenie")
     public String wypozyczPls(@ModelAttribute("orders") Orders orders){
-        orderRepo.save(new Orders(orders.getBookName(), orders.getNickName(), orders.getNames(), orders.getSurname(), new Date()));
+//        orderRepo.save(new Orders(orders.getBookName(), orders.getNickName(), orders.getNames(), orders.getSurname(), new Date()));
+        orderRepo.save(new Orders(orders.getBookName(), orders.getNickName(), orders.getNames(), orders.getSurname(), orders.getDates()));
         //String bookName, String nickName, String names, String surname, LocalDate dates
         return "wypozyczenie";
     }
