@@ -17,6 +17,7 @@ import java.util.List;
 public class RestControlleer {
 
     private static final int DAYS_USER_CAN_KEEP_BOOK = 3; // .. can keep book without penalty
+    private static final int PENALTY_IN_PLN_PER_DAY = 2; // .. can keep book without penalty
 
     public BookRepo bookRepo;
     private OrderRepo orderRepo;
@@ -81,7 +82,7 @@ public class RestControlleer {
                 }).mapToInt((order) -> {
                     return findDays(order.getStartDate()) - DAYS_USER_CAN_KEEP_BOOK;
                 }).sum();
-        return a;
+        return a * PENALTY_IN_PLN_PER_DAY;
     }
 
 
