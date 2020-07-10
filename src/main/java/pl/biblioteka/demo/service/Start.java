@@ -32,7 +32,7 @@ public class Start {
         bookRepo.save(new Book("2 wojna światowa ", "Hitler ", "Opowieść o 2 wojnie światowej ", Book.Gatunek.Historyczna));
         bookRepo.save(new Book("Dwie pary mlode ", "Joanna Bags ", "Opowieść o 2 parach mlodych ", Book.Gatunek.Romantyczna));
 
-        orderRepo.save(new Orders("Nazwa ksiazki", "Radq", "radek", "gackowski", new Date()));
+        orderRepo.save(new Orders("Nazwa ksiazki", "Radq", "radek", "gackowski", LocalDate.now()));
 
     }
 

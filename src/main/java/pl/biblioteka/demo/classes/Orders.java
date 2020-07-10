@@ -23,17 +23,17 @@ public class Orders {
     private String surname;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dates;
+    private LocalDate startDate;
 
     public Orders() {
     }
 
-    public Orders(String bookName, String nickName, String names, String surname, Date dates) {
+    public Orders(String bookName, String nickName, String names, String surname, LocalDate startDate) {
         this.bookName = bookName;
         this.nickName = nickName;
         this.names = names;
         this.surname = surname;
-        this.dates = dates;
+        this.startDate = startDate;
     }
 
 
@@ -77,12 +77,12 @@ public class Orders {
         this.surname = surname;
     }
 
-    public Date getDates() {
-        return dates;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setDates(Date dates) {
-        this.dates = dates;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     @Override
@@ -93,7 +93,7 @@ public class Orders {
                 ", nickName='" + nickName + '\'' +
                 ", names='" + names + '\'' +
                 ", surname='" + surname + '\'' +
-                ", dates=" + dates +
+                ", startDate=" + startDate +
                 '}';
     }
 }

@@ -11,9 +11,6 @@ import pl.biblioteka.demo.classes.Orders;
 import pl.biblioteka.demo.repo.BookRepo;
 import pl.biblioteka.demo.repo.OrderRepo;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 @Controller
 public class ControllerWypozyczen {
     private OrderRepo orderRepo;
@@ -63,7 +60,7 @@ public class ControllerWypozyczen {
     @PostMapping("/wypozyczenie")
     public String wypozyczPls(@ModelAttribute("orders") Orders orders){
 //        orderRepo.save(new Orders(orders.getBookName(), orders.getNickName(), orders.getNames(), orders.getSurname(), new Date()));
-        orderRepo.save(new Orders(orders.getBookName(), orders.getNickName(), orders.getNames(), orders.getSurname(), orders.getDates()));
+        orderRepo.save(new Orders(orders.getBookName(), orders.getNickName(), orders.getNames(), orders.getSurname(), orders.getStartDate()));
         //String bookName, String nickName, String names, String surname, LocalDate dates
         return "wypozyczenie";
     }
