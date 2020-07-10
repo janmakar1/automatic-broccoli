@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tutaj mozesz wypozyczyc ksiazke</title>
+</head>
+<body>
+
+<h1> Lista książęk: </h1>
+<table th:each="book : ${listBook}">
+    <tr th:text="${book.getTytul()}"></tr>
+    <tr th:text="${book.getAutor()}"></tr>
+    <tr th:text="${book.getOpis()}"></tr>
+    <tr th:text="${book.getGatunek()}"></tr><br>
+</table>
+
+<h1>Wypozycz książkę: </h1>
+
+<form action="#" th:action="@{/wypozyczenie}" th:object="${orders}" method="post">
+
+    <select th:field="*{bookName}">
+
+        <option
+                th:each="listBook : ${listBook}"
+                th:text="${listBook.tytul}"
+                th:value="${listBook.tytul}">
+        </option>
+    </select>
+
+     <label>Podaj nickname: </label>
+    <input type="text" th:field="${orders.nickName}">
+
+     <label>Podaj nazwisko: </label>
+    <input type="text" th:field="${orders.surname}">
+
+    <label>Podaj imię: </label>
+    <input type="text" th:field="${orders.names}">
+    <br>
+    <label>Data złożenia zamówienia automatycznie zostaje dodana do bazy danych wraz z kliknięciem przycisku!</label>
+    <input type="submit" value="Złóż zamówienie">
+
+
+
+</form>
+
+<input type="button" value="Wstecz" onClick="history.back()"/>
+</body>
+</html>
