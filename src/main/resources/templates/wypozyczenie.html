@@ -3,15 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Tutaj mozesz wypozyczyc ksiazke</title>
+
+    <style>
+        table {
+            border: 2px solid black;
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 2px;
+        }
+    </style>
+
 </head>
+
+
 <body>
 
-<h1> Lista książęk: </h1>
-<table th:each="book : ${listBook}">
-    <tr th:text="${book.getTytul()}"></tr>
-    <tr th:text="${book.getAutor()}"></tr>
-    <tr th:text="${book.getOpis()}"></tr>
-    <tr th:text="${book.getGatunek()}"></tr><br>
+<h1> Lista książek: </h1>
+<table>
+    <tr th:each="book : ${listBook}">
+        <td>ok</td>
+        <td th:text="${book.getTytul()}"></td>
+        <td th:text="${book.getAutor()}"></td>
+        <td th:text="${book.getOpis()}"></td>
+        <td th:text="${book.getGatunek()}"></td>
+    </tr>
 </table>
 
 <h1>Wypozycz książkę: </h1>
@@ -26,19 +43,22 @@
                 th:value="${listBook.tytul}">
         </option>
     </select>
+    <br/>
 
-     <label>Podaj nickname: </label>
+    <label>Podaj nickname: </label>
     <input type="text" th:field="${orders.nickName}">
+    <br/>
 
-     <label>Podaj nazwisko: </label>
+    <label>Podaj nazwisko: </label>
     <input type="text" th:field="${orders.surname}">
+    <br/>
 
     <label>Podaj imię: </label>
     <input type="text" th:field="${orders.names}">
     <br>
+
     <label>Data złożenia zamówienia automatycznie zostaje dodana do bazy danych wraz z kliknięciem przycisku!</label>
     <input type="submit" value="Złóż zamówienie">
-
 
 
 </form>
