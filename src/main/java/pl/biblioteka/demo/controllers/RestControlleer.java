@@ -62,6 +62,13 @@ public class RestControlleer {
         return period.getDays();
     }
 
+    /**
+    podobna funkcja do findDays, tylko, ze mozna ustawic konkretna date (do testow jednostkowych)
+     */
+    public int findDaysBetween(LocalDate then, LocalDate now) {
+        return Period.between(then, now).getDays();
+    }
+
     @GetMapping("/days/{nick}")
     public int showDaysOfOneBookForUser(@PathVariable String nick){
 
